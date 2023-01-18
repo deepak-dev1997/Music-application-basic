@@ -100,22 +100,40 @@ public class Main {
                     printMenu();
                     break;
                 case 5:
-                    System.out.println("select which song your want to delete");
-                    printSongs(playlist);
-                    int n=sc.nextInt();
-                    if(n<=0 || n> playlist.size()){
-                        System.out.println("invalid input");
-                        printMenu();
-                    }
-                    else{
-                        ListIterator itr2= playlist.listIterator();
-                        for(int a=1;a<n;a++){
-                            itr2.next();
-                        }
-                        playlist.remove(itr2.next());
-                        System.out.println("song has been removed");
-                        printMenu();
+                    System.out.println("If you want to delete current song press 1 \n if you want to delete any other song press 2");
+                    int rec=sc.nextInt();
+                    if(rec==1) {
+                        if(direction==true){
+                            itr.previous();
+                            playlist.remove(itr.next());
 
+                        }
+                        else{
+                            itr.next();
+                            playlist.remove(itr.previous());
+                        }
+                        System.out.println("song has been deleted");
+                        play(playlist);
+                    }
+                    else if(rec==2) {
+                        System.out.println("select which song your want to delete");
+                        printSongs(playlist);
+                        int n = sc.nextInt();
+                        if (n <= 0 || n > playlist.size()) {
+                            System.out.println("invalid input");
+                            printMenu();
+                        } else {
+                            ListIterator itr2 = playlist.listIterator();
+                            for (int a = 1; a < n; a++) {
+                                itr2.next();
+                            }
+                            playlist.remove(itr2.next());
+                            System.out.println("song has been removed");
+                            printMenu();
+                        }
+                        if(rec!=1 && rec!=2){
+                            System.out.println("invalid input");
+                        }
 
                     }
                     break;
